@@ -17,7 +17,7 @@ const Banner = (props : BannerProps) => {
     return (
         <Flex flexWrap="wrap" justifyContent="center" alignItems="center" m="10">
             <Image src={props.imageUrl} width={500} height={300} alt="banner"/>
-            <Box>
+            <Box p="5">
                 <Text color="gray.500" fontSize="sm" fontWeight="medium">{props.purpose}</Text>
                 <Text fontSize="3xl" fontWeight="bold">{props.title1}<br/>{props.title2}</Text>
                 <Text fontSize="lg" paddingTop="3" paddingBottom="3" color="gray.700">{props.desc1}</Text>
