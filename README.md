@@ -1,7 +1,5 @@
 A simple realtor website that fetches data from RapidAPI made with [Next.js](https://nextjs.org/) & TypeScript
 
-https://nextjs-realtor-ebon.vercel.app
-
 ## Getting Started
 
 First, run the development server:
