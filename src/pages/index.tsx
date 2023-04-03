@@ -1,10 +1,12 @@
-import Link from 'next/link';
-import Image from 'next/image';
 import Head from 'next/head';
-import { Flex, Box, Text, Button } from '@chakra-ui/react';
-import Banner from '@/components/Molecules/Banner/Banner';
+import { Flex, Box } from '@chakra-ui/react';
+import Banner from '@/components/Banner/Banner';
+import { baseEndpointUrl, fetchAPI } from '@/utils/fetchAPI';
+import { APIResponse, Hit } from '@/utils/APIResponse.model';
+import Property from '@/components/Property/Property';
 
-export default function Home() {
+export default function Home({propertiesForSale, propertiesForRent} : {propertiesForSale: Hit[], propertiesForRent: Hit[]}) {
+  console.log(propertiesForSale, propertiesForRent)
   return (
     <>
       <Head>
@@ -22,9 +24,12 @@ export default function Home() {
           desc1="Chercher des appartements, villas, maisons"
           desc2="et plus..."
           buttonText="Voir les offres"
-          linkName="/search?purpose=location"
+          linkName="/search?purpose=for-rent"
           imageUrl="https://bayut-production.s3.eu-central-1.amazonaws.com/image/145426814/33973352624c48628e41f2ec460faba4"
         />
+        <Flex flexWrap="wrap">
+          {propertiesForRent.map((property: Hit) => <Property property={property} key={property.id}/>)}
+        </Flex>
         <Banner 
           purpose="Achat"
           title1="Trouver, acheter et devenir propriétaire"
@@ -32,10 +37,25 @@ export default function Home() {
           desc1="Chercher des appartements, villas, maisons"
           desc2="et plus..."
           buttonText="Voir les offres"
-          linkName="/search?purpose=achat"
+          linkName="/search?purpose=for-sale"
           imageUrl="https://bayut-production.s3.eu-central-1.amazonaws.com/image/145426814/33973352624c48628e41f2ec460faba4"
         />
+        <Flex flexWrap="wrap">
+          {propertiesForSale.map((property: Hit) => <Property property={property} key={property.id}/>)}
+        </Flex>
       </Box>
     </>
   )
+}
+
+export async function getStaticProps(){
+  const propertyForSale : APIResponse = await fetchAPI(`${baseEndpointUrl}/properties/list?locationExternalIDs=5002&purpose=for-sale&hitsPerPage=6`);
+  const propertyForRent : APIResponse = await fetchAPI(`${baseEndpointUrl}/properties/list?locationExternalIDs=5002&purpose=for-rent&hitsPerPage=6`);
+
+  return {
+    props: {
+      propertiesForSale: propertyForSale?.hits,
+      propertiesForRent: propertyForRent?.hits
+    }
+  }
 }
