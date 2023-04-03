@@ -9,6 +9,7 @@ import { Hit } from "@/utils/APIResponse.model";
 import noresult from "public/noresult.svg";
 import { baseEndpointUrl, fetchAPI } from "@/utils/fetchAPI";
 import { GetServerSideProps } from "next";
+import { APIResponse } from "@/utils/APIResponse.model";
 
 const Search = ({ properties } : { properties : Hit[] }) => {
     const [searchFilters, setSearchFilters] = useState(false);
@@ -64,7 +65,7 @@ export const getServerSideProps : GetServerSideProps<{properties : Hit[]}> = asy
     const locationExternalIDs = query.locationExternalIDs || '5002';
     const categoryExternalID = query.categoryExternalID || '4';
 
-    const data = await fetchAPI(`${baseEndpointUrl}/properties/list?locationExternalIDs=${locationExternalIDs}&purpose=${purpose}&categoryExternalID=${categoryExternalID}&bathsMin=${bathsMin}&rentFrequency=${rentFrequency}&priceMin=${minPrice}&priceMax=${maxPrice}&roomsMin=${roomsMin}&sort=${sort}&areaMax=${areaMax}&hitsPerPage=6`);
+    const data = await fetchAPI(`${baseEndpointUrl}/properties/list?locationExternalIDs=${locationExternalIDs}&purpose=${purpose}&categoryExternalID=${categoryExternalID}&bathsMin=${bathsMin}&rentFrequency=${rentFrequency}&priceMin=${minPrice}&priceMax=${maxPrice}&roomsMin=${roomsMin}&sort=${sort}&areaMax=${areaMax}&hitsPerPage=6`) as APIResponse;
     return {
       props: {
         properties: data?.hits
