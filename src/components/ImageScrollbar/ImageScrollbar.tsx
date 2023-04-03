@@ -44,8 +44,8 @@ const ImageScrollbar = ({ data } : { data : Photo[]}) => {
                 <Box width='910px' itemID={String(item.id)} overflow='hidden' p='1' key={item.id}>
                     <Image 
                         alt="photo" 
-                        placeholder="blur" 
-                        blurDataURL={item.url} 
+                        placeholder='blur'
+                        blurDataURL='https://i0.wp.com/theluxurytravelexpert.com/wp-content/uploads/2020/11/JADE-MOUNTAIN-ST-LUCIA.jpg'
                         src={item.url} 
                         width={1000} 
                         height={500} 
