@@ -42,12 +42,12 @@ export default function Home({propertiesForSale, propertiesForRent} : {propertie
 }
 
 export async function getStaticProps(){
-  const propertyForSale : APIResponse = await fetchAPI(`${baseEndpointUrl}/properties/list?locationExternalIDs=5002&purpose=for-sale&hitsPerPage=6`);
-  const propertyForRent : APIResponse = await fetchAPI(`${baseEndpointUrl}/properties/list?locationExternalIDs=5002&purpose=for-rent&hitsPerPage=6`);
+  const propertyForSale = await fetchAPI(`${baseEndpointUrl}/properties/list?locationExternalIDs=5002&purpose=for-sale&hitsPerPage=6`) as APIResponse;
+  const propertyForRent = await fetchAPI(`${baseEndpointUrl}/properties/list?locationExternalIDs=5002&purpose=for-rent&hitsPerPage=6`) as APIResponse;
 
   return {
     props: {
-      propertiesForSale: propertyForSale?.hits,
+      propertiesForSale: propertyForSale?.hits, 
       propertiesForRent: propertyForRent?.hits
     }
   }
