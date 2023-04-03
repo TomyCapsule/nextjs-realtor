@@ -1,4 +1,4 @@
-A simple realtor website that fetches data from RapidAPI made with [Next.js](https://nextjs.org/)
+A simple realtor website that fetches data from RapidAPI made with [Next.js](https://nextjs.org/) & TypeScript
 
 
 ## Getting Started
